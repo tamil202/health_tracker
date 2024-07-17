@@ -1,0 +1,41 @@
+<section>
+<div class="bg-slate-50 shadow-2xl p-5 rounded">
+   <form [formGroup]="formData">
+    <div class="grid grid-cols-2">
+        <!-- check data -->
+        @if(data && data.length){
+        <!-- Loop the data -->
+        @for (item of data; track item.id) {
+        @if(item.type === 'select'){
+       <div class="bg-gray-200 py-1 px-5 border-b border-black capitalize m-2 flex flex-col  gap-y-2">
+        <label class="text-[14px] text-gray-500" for={{item.name}}>{{item.name}}<span class="text-red-500">{{item.required}}</span></label>
+        <select class="outline-none bg-transparent" name={{item.name}} id={{item.name}} formControlName={{item.name}}>
+            <!--  Loop the Options -->
+            @for (option of item.workoutOptions ; track $index) {
+            <option value={{option}}>{{option}}</option>
+            }
+        </select>
+       </div>
+        }
+        @else {
+        <div class="bg-gray-200 py-1 px-5 border-b border-black capitalize m-2 flex flex-col  gap-y-2">
+            <label class="text-[14px] text-gray-500" for={{item.name}}>{{item.name}} <span class="text-red-500">{{item.required}}</span></label>
+            <input class="outline-none bg-transparent" formControlName={{item.name}} type={{item.type}} name={{item.name}} id={{item.name}}>
+        </div>
+        }
+        }
+        <!-- once the for-loop data is async to load this @empty  -->
+        @empty {
+        <p>Loading...</p>
+        }
+        }
+    </div>
+   </form>
+   <!-- Add Button -->
+  <div>
+    <button [disabled]="this.formData.invalid" (click)="isSubmit()" class="{{this.formData.invalid?'cursor-not-allowed':'cursor-pointer'}} p-2 bg-white shadow-lg text-blue-500 capitalize rounded-full px-3 py-1 mt-5">
+        add workout
+    </button>
+  </div>
+</div>
+</section>

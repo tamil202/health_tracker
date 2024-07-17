@@ -1,13 +1,12 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-
+import { Component, ViewEncapsulation } from '@angular/core';
+import { add_task, seacr_task, progress } from './export';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [add_task, seacr_task, progress],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent {
-  title = 'health_tracker';
+  constructor() {}
 }
