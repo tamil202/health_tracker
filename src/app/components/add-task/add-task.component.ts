@@ -3,6 +3,7 @@ import { AppService } from '../../services/app.service';
 import { Component, ViewEncapsulation } from '@angular/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { ToastrService } from 'ngx-toastr';
 import {
   FormControl,
   FormGroup,
@@ -24,16 +25,19 @@ import { USERDATAFORMTYPE } from '../../interface/app.interface';
   encapsulation: ViewEncapsulation.None,
 })
 export class AddTaskComponent {
-  constructor(private appservice: AppService) {}
+  constructor(private appservice: AppService, private toaster: ToastrService) {}
 
   data: USERDATAFORMTYPE[] = [];
   // form
   formData: FormGroup = new FormGroup({});
   // make form dyname
   ngOnInit(): void {
-    if (this.appservice.userData && this.appservice.userData.length) {
-      this.data = this.appservice.userData; // copying data
-      this.appservice.userData.forEach((item: any) => {
+    if (
+      this.appservice.userDataInputFields &&
+      this.appservice.userDataInputFields.length
+    ) {
+      this.data = this.appservice.userDataInputFields; // copying data
+      this.appservice.userDataInputFields.forEach((item: any) => {
         this.formData.addControl(
           item.name,
           new FormControl('', [Validators.required])
@@ -43,6 +47,15 @@ export class AddTaskComponent {
   }
 
   isSubmit = (): void => {
-    console.log(this.formData.value);
+    this.appservice.getUserData(this.formData.value).subscribe({
+      next: () => {
+        this.formData.reset();
+        this.toaster.success('Added');
+      },
+      error: (error) => {
+         console.error('Error adding user:', error);
+         this.toaster.error('Failed to add user');
+      }
+    });
   };
 }

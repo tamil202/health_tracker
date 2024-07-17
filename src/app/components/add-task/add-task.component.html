@@ -8,7 +8,7 @@
         @for (item of data; track item.id) {
         @if(item.type === 'select'){
        <div class="bg-gray-200 py-1 px-5 border-b border-black capitalize m-2 flex flex-col  gap-y-2">
-        <label class="text-[14px] text-gray-500" for={{item.name}}>{{item.name}}<span class="text-red-500">{{item.required}}</span></label>
+        <label class="text-[14px] text-gray-500" for={{item.name}}>{{item.label}}<span class="text-red-500">{{item.required}}</span></label>
         <select class="outline-none bg-transparent" name={{item.name}} id={{item.name}} formControlName={{item.name}}>
             <!--  Loop the Options -->
             @for (option of item.workoutOptions ; track $index) {
@@ -19,7 +19,7 @@
         }
         @else {
         <div class="bg-gray-200 py-1 px-5 border-b border-black capitalize m-2 flex flex-col  gap-y-2">
-            <label class="text-[14px] text-gray-500" for={{item.name}}>{{item.name}} <span class="text-red-500">{{item.required}}</span></label>
+            <label class="text-[14px] text-gray-500 capitalize" for={{item.name}}>{{item.name}} <span class="text-red-500">{{item.required}}</span></label>
             <input class="outline-none bg-transparent" formControlName={{item.name}} type={{item.type}} name={{item.name}} id={{item.name}}>
         </div>
         }

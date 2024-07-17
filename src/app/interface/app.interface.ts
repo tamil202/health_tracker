@@ -6,7 +6,13 @@ export interface WORKOUT {
 export interface USERDATA {
   id?: number;
   name?: string;
-  workouts?: [WORKOUT];
+  workouts?: WORKOUT[];
+}
+
+export interface DATA {
+  Username?: string;
+  WorkoutType?: string;
+  WorkoutMinutes?: number;
 }
 
 export interface USERDATAFORMTYPE {
@@ -15,5 +21,6 @@ export interface USERDATAFORMTYPE {
   name?: string;
   placeholder?: string;
   required?: string;
+  label?: string;
   workoutOptions?: string[];
 }
