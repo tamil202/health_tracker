@@ -47,7 +47,7 @@ export class AddTaskComponent {
     }
   }
 
-  // store in object
+  // data store in object
   obj: any = {
     name,
     workouts: [],

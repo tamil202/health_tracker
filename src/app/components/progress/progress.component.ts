@@ -17,7 +17,7 @@ export class ProgressComponent {
   ngOnInit(): void {
     const getItem = this.appservice.getItem();
     if (!getItem) {
-      return console.log('No data foun');
+      return console.log('No data found');
     }
     this.data = getItem;
   }
@@ -44,6 +44,7 @@ export class ProgressComponent {
     this.single = objCpy;
   };
 
+  // Default values to show in graph
   single: any = [
     {
       name: 'null',
