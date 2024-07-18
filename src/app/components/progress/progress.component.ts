@@ -2,11 +2,11 @@ import { Component, ViewEncapsulation } from '@angular/core';
 import { AppService } from '../../services/app.service';
 import { USERDATA, WORKOUT } from '../../interface/app.interface';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-progress',
   standalone: true,
-  imports: [NgxChartsModule],
+  imports: [CommonModule, NgxChartsModule],
   templateUrl: './progress.component.html',
   encapsulation: ViewEncapsulation.None,
 })
