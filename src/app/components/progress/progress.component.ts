@@ -22,7 +22,6 @@ export class ProgressComponent {
     this.data = getItem;
   }
 
-  view: any[] = [700, 400];
   // options
   showXAxis = true;
   showYAxis = true;

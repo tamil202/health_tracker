@@ -21,7 +21,7 @@ export class AppService {
     },
     //   workout type
     {
-      id: 1,
+      id: 2,
       type: 'select',
       name: 'WorkoutType',
       placeholder: 'eg : Running',
@@ -47,7 +47,7 @@ export class AppService {
     },
     // workout time
     {
-      id: 1,
+      id: 3,
       type: 'number',
       name: 'WorkoutMinutes',
       placeholder: 'eg : 30',
@@ -88,7 +88,7 @@ export class AppService {
   ];
 
   // create user and task
-  getUserData = (data: DATA): Observable<USERDATA[]> => {
+  getUserData = (data: any): Observable<USERDATA[]> => {
     // Get local storage and parse the data
     const getItem: any = localStorage.getItem('userdata');
     const userdata = JSON.parse(getItem) || [];
@@ -102,25 +102,18 @@ export class AppService {
       : 0;
 
     // Calculate total minutes
-    const totalMinutes: number = [
-      { type: data.WorkoutType, minutes: data.WorkoutMinutes },
-    ].reduce((sum: any, workout: any) => sum + workout.minutes, 0);
+    let total =  data.workouts.reduce((acc:any, cur:any)=> {return acc + cur.minutes;},0)
 
-    // Create the new user object with total minutes
-    const newUser = {
-      id: maxId + 1,
-      name: data.Username,
-      workouts: [{ type: data.WorkoutType, minutes: data.WorkoutMinutes }],
-      totalmin: totalMinutes,
-    };
-
+    //  Add id and toatlminutes
+    data.id = maxId + 1;
+    data.totalmin = total;
+   
     // Add the new user to the userdata array
-    userdata.push(newUser);
+    userdata.push(data);
 
     // Convert back to JSON and set local storage
     const jsonModified = JSON.stringify(userdata);
     localStorage.setItem('userdata', jsonModified);
-
     return of(userdata);
   };
 

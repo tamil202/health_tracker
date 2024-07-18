@@ -20,10 +20,11 @@
         @else {
         <div class="bg-gray-200 py-1 px-5 border-b border-black capitalize m-2 flex flex-col  gap-y-2">
             <label class="text-[14px] text-gray-500 capitalize" for={{item.name}}>{{item.label}} <span class="text-red-500">{{item.required}}</span></label>
-            <input class="outline-none bg-transparent" placeholder={{item.placeholder}} formControlName={{item.name}} type={{item.type}} name={{item.name}} id={{item.name}}>
+            <input class="{{this.formData.invalid? 'border-red-500':'border-black'}} outline-none bg-transparent" placeholder={{item.placeholder}} formControlName={{item.name}} type={{item.type}} name={{item.name}} id={{item.name}}>
         </div>
         }
         }
+       
         <!-- once the for-loop data is async to load this @empty  -->
         @empty {
         <p>Loading...</p>
@@ -31,11 +32,22 @@
         }
     </div>
    </form>
-   <!-- Add Button -->
-  <div>
-    <button [disabled]="this.formData.invalid" (click)="isSubmit()" class="{{this.formData.invalid?'cursor-not-allowed':'cursor-pointer'}} p-2 bg-white shadow-lg text-blue-500 capitalize rounded-full px-3 py-1 mt-5">
-        add workout
-    </button>
-  </div>
+   
+    <div class="flex gap-x-4">
+        <!-- Add more workout -->
+        <div>
+            <button [disabled]="this.formData.invalid" (click)="isAddWorkOut()"
+                class="{{this.formData.invalid?'cursor-not-allowed':'cursor-pointer'}} p-2 bg-white shadow-lg text-blue-500 capitalize rounded-full px-3 py-1 mt-5">
+                add more workout
+            </button>
+        </div>
+        <!-- Add Button -->
+        <div>
+            <button [disabled]="this.formData.invalid" (click)="isSubmit()"
+                class="{{this.formData.invalid ?'cursor-not-allowed':'cursor-pointer'}} p-2 bg-white shadow-lg text-blue-500 capitalize rounded-full px-3 py-1 mt-5">
+                add workout
+            </button>
+        </div>
+    </div>
 </div>
 </section>
