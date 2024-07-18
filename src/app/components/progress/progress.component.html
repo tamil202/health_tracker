@@ -1,1 +1,28 @@
-<p>progress works!</p>
+<div class="container mx-auto">
+    <div class="grid gap-y-3 md:grid-cols-2 grid-cols-1 gap-x-3 p-10 text-xl">
+        <div class="bg-slate-50 shadow-xl  rounded">
+            <ul class="px-5 py-1">
+                @for (item of data; track $index) {
+                <li (click)="isClick(item)"
+                    class="hover:bg-gray-300 active:scale-105 focus:bg-gray-100 cursor-pointer m-2 capitalize px-2 py-1 rounded bg-transparent">
+                    {{ item.name }}
+                </li>
+                <hr>
+                }
+                @empty {
+                <li class="text-red-600">No Data Data Found!</li>
+                }
+            </ul>
+        
+        </div>
+        <div class="bg-slate-50 shadow-2xl p-5 rounded overflow-auto h-96">
+            <div class="text-center">
+                <h5>Minutes</h5>
+            </div>
+            <ngx-charts-bar-vertical [results]="single" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis"
+                [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+                [xAxisLabel]="xAxisLabel">
+            </ngx-charts-bar-vertical>
+        </div>
+    </div>
+</div>

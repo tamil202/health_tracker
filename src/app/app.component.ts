@@ -15,7 +15,7 @@ export class AppComponent {
     localStorage.setItem('userdata', jsonModifiy);
   }
 
-  isSwitch = signal<number>(2);
+  isSwitch = signal<number>(3);
   isClick = (number: number): void => {
     this.isSwitch.set(number);
   };
