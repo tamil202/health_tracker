@@ -2,7 +2,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.2.
 
-## HealthTracker
+## Download
 The File Download or git clone the url cd path:\\ a file and npm i or npm install.
 
 ## Development server
