@@ -1,7 +1,36 @@
-<section>
-    <div class="flex justify-center items-center min-h-screen">
-        <div class="">
-               <app-add-task></app-add-task>
+<section class="select-none">
+    <div class="container mx-auto rounded p-5 bg-slate-50 shadow-xl flex mt-20 overflow-hidden">
+        <div class="w-full">
+            <span class=" text-[15px] sm:text-xl uppercase font-bold">health tracker</span>
+               <ul class=" mt-5 flex gap-x-5 p-3 overflow-hidden">
+                <li (click)="isClick(1)" class="bg-gray-500 active:scale-110 text-white px-2 py-1 rounded hover:bg-slate-400 cursor-pointer">Add</li>
+                <li (click)="isClick(2)" class="bg-gray-500 active:scale-110 text-white px-2 py-1 rounded hover:bg-slate-400 cursor-pointer">Search</li>
+                <li (click)="isClick(3)" class="bg-gray-500 active:scale-110 text-white px-2 py-1 rounded hover:bg-slate-400 cursor-pointer">Progress</li>
+               </ul>
+        <div>
+            @switch (isSwitch()) {
+            @case (1) {
+            <div>
+                <app-add-task></app-add-task>
+            </div>
+            }
+            @case (2) {
+            <div class="">
+                <app-search></app-search>
+            </div>
+            }@case (3) {
+            <div>
+                <app-progress></app-progress>
+            </div>
+            }
+            @default {
+                <div class="">
+                    <app-search></app-search>
+                </div>
+            }
+            }
         </div>
+            </div>
+       
     </div>
 </section>

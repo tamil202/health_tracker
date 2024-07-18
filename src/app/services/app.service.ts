@@ -65,6 +65,7 @@ export class AppService {
         { type: 'Running', minutes: 30 },
         { type: 'Cycling', minutes: 45 },
       ],
+      totalmin: 80,
     },
     {
       id: 2,
@@ -73,6 +74,7 @@ export class AppService {
         { type: 'Swimming', minutes: 60 },
         { type: 'Running', minutes: 20 },
       ],
+      totalmin: 80,
     },
     {
       id: 3,
@@ -81,14 +83,16 @@ export class AppService {
         { type: 'Yoga', minutes: 50 },
         { type: 'Cycling', minutes: 40 },
       ],
+      totalmin: 90,
     },
   ];
 
   // create user and task
   getUserData = (data: DATA): Observable<USERDATA[]> => {
-    // get localstorage and parse the data
-    const getitem: any = localStorage.getItem('userdata');
-    const userdata = JSON.parse(getitem);
+    // Get local storage and parse the data
+    const getItem: any = localStorage.getItem('userdata');
+    const userdata = JSON.parse(getItem) || [];
+
     // Find the highest current id
     const maxId: number = userdata.length
       ? userdata.reduce(
@@ -96,17 +100,35 @@ export class AppService {
           userdata[0].id
         )
       : 0;
-    // Create the new user object
+
+    // Calculate total minutes
+    const totalMinutes: number = [
+      { type: data.WorkoutType, minutes: data.WorkoutMinutes },
+    ].reduce((sum: any, workout: any) => sum + workout.minutes, 0);
+
+    // Create the new user object with total minutes
     const newUser = {
       id: maxId + 1,
       name: data.Username,
       workouts: [{ type: data.WorkoutType, minutes: data.WorkoutMinutes }],
+      totalmin: totalMinutes,
     };
-    // Add the new user to the userData array
+
+    // Add the new user to the userdata array
     userdata.push(newUser);
-    // Again change  JSON type and set localstorage
-    const jsonModifiy = JSON.stringify(userdata);
-    localStorage.setItem('userdata', jsonModifiy);
+
+    // Convert back to JSON and set local storage
+    const jsonModified = JSON.stringify(userdata);
+    localStorage.setItem('userdata', jsonModified);
+
     return of(userdata);
+  };
+
+  // get data form local storage
+  getItem = () => {
+    // get localstorage and parse the data
+    const getitem: any = localStorage.getItem('userdata');
+    const userdata = JSON.parse(getitem);
+    return userdata;
   };
 }

@@ -1,1 +1,62 @@
-<p>search works!</p>
+<section class="p-1">
+    <div class="flex justify-center flex-col  p-2">
+        <div class="grid grid-cols-1 sm:grid-cols-2   sm:gap-x-2 gap-y-2 md:sm:gap-x-5 justify-around ">
+            <div class="bg-gray-200  px-5 border-b border-black capitalize  flex flex-col  gap-y-2">
+                <label class="text-[14px] text-gray-500 capitalize" for='search'>search</label>
+                <input [(ngModel)]="searchInput" class="outline-none bg-transparent " placeholder='eg : John' 
+                    type='text' name='search' id='search'>
+            </div>
+            <div class="bg-gray-200  px-5 border-b border-black capitalize  flex flex-col  gap-y-2">
+                <label class="text-[14px] text-gray-500 capitalize" for='workouttype'>filter by workout type</label>
+                <select (click)="filter()"  [(ngModel)]="selectInput" name="workouttype" id="workouttype" class="outline-none bg-transparent">
+                    @for (item of workoutOptions; track $index) {
+                   @if(item ==='All'){
+                    <option  value={{item}} [defaultSelected]="true">{{item}}</option>
+                   }@else {
+                    <option value={{item}}>{{item}}</option>
+                   }
+                    }
+                </select>
+            </div>
+        </div>
+       <!-- table -->
+        <div class="mt-5">
+            <div class="flex flex-col overflow-x-auto">
+                <div class="sm:-mx-6 lg:-mx-8">
+                    <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full text-left text-sm font-light">
+                                <thead class="border-b font-medium dark:border-neutral-500">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-4">#</th>
+                                        <th scope="col" class="px-6 py-4">Name</th>
+                                        <th scope="col" class="px-6 py-4">workout</th>
+                                        <th scope="col" class="px-6 py-4">Number of Workouts</th>
+                                        <th scope="col" class="px-6 py-4">Total Workouts Minutes</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (item of data; track item; let i=$index; let even = $even) {
+                                        <tr class="border-b dark:border-neutral-500 {{even?'bg-gray-100':''}}">
+                                            <td class="whitespace-nowrap px-6 py-4 font-medium">{{i+1}}</td>
+                                            <td class="whitespace-nowrap px-6 py-4">{{item.name}}</td>
+                                            <td class="whitespace-nowrap px-6 py-4">
+                                                @for (workoutoptions of item.workouts; track $index) {
+                                                    {{workoutoptions.type}},
+                                                }
+                                            </td>
+                                            <td class="whitespace-nowrap px-6 py-4">{{item.workouts?.length}}</td>
+                                            <td class="whitespace-nowrap px-6 py-4">
+                                                {{item.totalmin}}
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -7,6 +7,7 @@ export interface USERDATA {
   id?: number;
   name?: string;
   workouts?: WORKOUT[];
+  totalmin?: number;
 }
 
 export interface DATA {
